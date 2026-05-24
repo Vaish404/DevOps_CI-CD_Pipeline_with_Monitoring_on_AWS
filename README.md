@@ -35,22 +35,16 @@ Monitoring & Alerting → Prometheus + Grafana
 
 🐳 Dockerization
 
-# Base image
 FROM python:3.9-slim
 
-# Set working directory inside container
 WORKDIR /app
 
-# Copy project files
 COPY . .
 
-# Install dependencies
 RUN pip install -r requirements.txt
 
-# Expose application port
 EXPOSE 5000
 
-# Run application
 CMD ["python", "app.py"]
 
 
