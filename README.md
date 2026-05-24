@@ -16,7 +16,11 @@ Monitoring & Alerting → Prometheus + Grafana
 
                           
 🏗️ Infrastructure Setup
-ServiceHostPortRoleJenkinsAWS EC28080Manages the full CI/CD pipelineFlask AppDocker container on EC25000Runs the Task Manager appPrometheusAWS EC29090Scrapes /metrics from FlaskGrafanaAWS EC23000Visualises Prometheus data
+Service     Host                       Port   Role
+Jenkins     AWS EC2                    8080   Manages the full CI/CD pipeline
+Flask App   Docker container on EC2    5000   Runs the Task Manager app
+Prometheus  AWS EC2                    9090   Scrapes /metrics from Flask
+Grafana     AWS EC2                    3000   Visualises Prometheus data
 
 🛠️ Tech Stack
 CategoryTechnologyVersionApplicationPython + Flask3.9ContainerizationDockerlatestCI/CDJenkinslatestCloudAWS EC2 (Ubuntu)22.04MonitoringPrometheuslatestDashboardGrafanalatestVersion ControlGit + GitHub—
@@ -33,9 +37,9 @@ DevOps_CI-CD_Pipeline_with_Monitoring_on_AWS/
 └── README.md
 
 🐍 Application — Flask Task Manager
-The core app (app.py) is a Task Manager with 4 routes:
+The core app app.py is a Task Manager with 4 routes:
 RouteMethodWhat it does/GETShow all tasks/addPOSTAdd a task (saved as Pending + timestamp)/complete/<id>GETMark task as Completed/delete/<id>GETRemove task from list
-Prometheus Metrics Exposed at /metrics
+Prometheus Metrics — exposed at /metrics
 MetricTypeDescriptiontasks_created_totalCounterTotal tasks ever addedtasks_completed_totalCounterTotal tasks marked completedtasks_pending_totalGaugeLive count of pending tasks
 
 🐳 Dockerization
