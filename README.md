@@ -12,22 +12,8 @@ Monitoring & Alerting → Prometheus + Grafana
 
 
 🏗️ Architecture
-Developer  →  GitHub Push
-                   ↓
-             Jenkins (CI/CD)
-           ┌────────────────┐
-           │  1. Pull Code   │
-           │  2. Build Image │
-           │  3. Run Tests   │
-           │  4. Push to Hub │
-           │  5. Deploy      │
-           └────────────────┘
-                   ↓
-         Docker Container on AWS EC2
-                   ↓
-        Flask App  ←→  Prometheus Metrics
-                              ↓
-                          Grafana Dashboard
+<img width="1146" height="664" alt="image" src="https://github.com/user-attachments/assets/8abfbe7a-5806-44fb-8e6d-2e69bdd4d8c0" />
+
                           
 Infrastructure Setup:
 
@@ -80,20 +66,8 @@ Access the app at: http://localhost:5000
 ⚙️ CI/CD Pipeline — Jenkins
 Jenkins automates the entire build and deployment workflow. Every push to the GitHub repository triggers the pipeline.
 Pipeline Stages
-Stage 1: Checkout
-  └── Pull latest code from GitHub main branch
+<img width="915" height="177" alt="image" src="https://github.com/user-attachments/assets/f8898e29-86cd-40ce-88b2-a558d53580b8" />
 
-Stage 2: Build Docker Image
-  └── docker build -t devops-demo-app .
-
-Stage 3: Stop & Remove Old Container (if running)
-  └── docker rm -f devops-demo-app || true
-
-Stage 4: Run New Container
-  └── docker run -d -p 5000:5000 --name devops-demo-app devops-demo-app
-
-Stage 5: Verify Deployment
-  └── Check container is running (docker ps)
 Jenkins Setup on AWS EC2
 
 Launch an EC2 instance (Ubuntu 22.04, t2.medium recommended)
@@ -114,6 +88,9 @@ Add a webhook in GitHub → http://<EC2-Public-IP>:8080/github-webhook/
 
 
 📊 Monitoring — Prometheus + Grafana
+<img width="1127" height="273" alt="image" src="https://github.com/user-attachments/assets/76c712e9-ae90-49be-83b8-a200183c839f" />
+
+
 Prometheus Configuration
 Prometheus is configured to scrape the Flask app's /metrics endpoint every 15 seconds.
 prometheus.yml:
