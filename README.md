@@ -15,53 +15,40 @@ Monitoring & Alerting → Prometheus + Grafana
 <img width="1146" height="664" alt="image" src="https://github.com/user-attachments/assets/8abfbe7a-5806-44fb-8e6d-2e69bdd4d8c0" />
 
                           
-Infrastructure Setup:
-
-AWS EC2 Instance — Hosts Jenkins, Docker, Prometheus, and Grafana
-Jenkins — Runs on port 8080, manages the full pipeline
-Flask App — Runs inside a Docker container on port 5000
-Prometheus — Scrapes /metrics endpoint of the Flask app
-Grafana — Visualizes Prometheus data on dashboards
-
+🏗️ Infrastructure Setup
+ServiceHostPortRoleJenkinsAWS EC28080Manages the full CI/CD pipelineFlask AppDocker container on EC25000Runs the Task Manager appPrometheusAWS EC29090Scrapes /metrics from FlaskGrafanaAWS EC23000Visualises Prometheus data
 
 🛠️ Tech Stack
-CategoryTechnologyApplicationPython 3.9, FlaskContainerizationDockerCI/CDJenkinsCloudAWS EC2 (Ubuntu)MonitoringPrometheusDashboardGrafanaVersion ControlGit, GitHub
+CategoryTechnologyVersionApplicationPython + Flask3.9ContainerizationDockerlatestCI/CDJenkinslatestCloudAWS EC2 (Ubuntu)22.04MonitoringPrometheuslatestDashboardGrafanalatestVersion ControlGit + GitHub—
 
 📂 Project Structure
 DevOps_CI-CD_Pipeline_with_Monitoring_on_AWS/
 │
-├── app.py                     # Flask web application with Prometheus metrics
-├── Dockerfile                 # Docker image build instructions
-├── requirements.txt           # Python dependencies (Flask, prometheus_client)
+├── app.py                      # Flask app + Prometheus metrics
+├── Dockerfile                  # Container build instructions
+├── requirements.txt            # flask, prometheus_client
 ├── templates/
-│   └── index.html             # Frontend HTML template for the Task Manager UI
-├── project explaination.pdf   # Detailed project documentation
-└── README.md                  # Project documentation (this file)
+│   └── index.html              # Task Manager UI
+├── project explaination.pdf    # Detailed project documentation
+└── README.md
 
 🐍 Application — Flask Task Manager
-The core application (app.py) is a simple Task Manager web app built with Flask. It supports:
-
-➕ Add a task — Submit a new task with a name; it gets saved with a timestamp and Pending status
-✅ Complete a task — Mark any pending task as Completed
-🗑️ Delete a task — Remove a task from the list
-
-Prometheus Metrics Exposed
-The app exposes a /metrics endpoint consumed by Prometheus with these custom metrics:
-Metric NameTypeDescriptiontasks_created_totalCounterTotal number of tasks ever createdtasks_completed_totalCounterTotal number of tasks marked as completedtasks_pending_totalGaugeCurrent number of tasks in pending state
-These metrics allow real-time tracking of application behavior directly in Grafana.
+The core app (app.py) is a Task Manager with 4 routes:
+RouteMethodWhat it does/GETShow all tasks/addPOSTAdd a task (saved as Pending + timestamp)/complete/<id>GETMark task as Completed/delete/<id>GETRemove task from list
+Prometheus Metrics Exposed at /metrics
+MetricTypeDescriptiontasks_created_totalCounterTotal tasks ever addedtasks_completed_totalCounterTotal tasks marked completedtasks_pending_totalGaugeLive count of pending tasks
 
 🐳 Dockerization
-The app is containerized using a minimal Dockerfile:
-dockerfileFROM python:3.9-slim       # Lightweight base image
-WORKDIR /app               # Set working directory
-COPY . .                   # Copy all project files
-RUN pip install -r requirements.txt  # Install dependencies
-EXPOSE 5000                # Expose Flask port
-CMD ["python", "app.py"]  # Start the app
+dockerfileFROM python:3.9-slim
+WORKDIR /app
+COPY . .
+RUN pip install -r requirements.txt
+EXPOSE 5000
+CMD ["python", "app.py"]
 Build and run locally:
 bashdocker build -t devops-demo-app .
 docker run -p 5000:5000 devops-demo-app
-Access the app at: http://localhost:5000
+
 
 ⚙️ CI/CD Pipeline — Jenkins
 Jenkins automates the entire build and deployment workflow. Every push to the GitHub repository triggers the pipeline.
