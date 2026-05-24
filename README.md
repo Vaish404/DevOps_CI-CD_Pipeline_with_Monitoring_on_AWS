@@ -16,17 +16,21 @@ Monitoring & Alerting → Prometheus + Grafana
 
                           
 🏗️ Infrastructure Setup
+
 <img width="903" height="233" alt="image" src="https://github.com/user-attachments/assets/90be8354-4d24-4e25-9287-207bacc4a531" />
 
 
 🛠️ Tech Stack
+
 <img width="891" height="270" alt="image" src="https://github.com/user-attachments/assets/cd92e9c2-6f1e-4b55-8923-df511267466b" />
 
 📂 Project Structure
+
 <img width="894" height="314" alt="image" src="https://github.com/user-attachments/assets/3f0c2a16-a41f-49a8-903e-88d1e1dfa8e7" />
 
 
 🐍 Application — Flask Task Manager
+
 <img width="900" height="440" alt="image" src="https://github.com/user-attachments/assets/6ef3f579-8a79-4a79-9ac9-4a0cb2ac457b" />
 
 🐳 Dockerization
