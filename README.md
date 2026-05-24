@@ -16,31 +16,18 @@ Monitoring & Alerting → Prometheus + Grafana
 
                           
 🏗️ Infrastructure Setup
-Service     Host                       Port   Role
-Jenkins     AWS EC2                    8080   Manages the full CI/CD pipeline
-Flask App   Docker container on EC2    5000   Runs the Task Manager app
-Prometheus  AWS EC2                    9090   Scrapes /metrics from Flask
-Grafana     AWS EC2                    3000   Visualises Prometheus data
+<img width="903" height="233" alt="image" src="https://github.com/user-attachments/assets/90be8354-4d24-4e25-9287-207bacc4a531" />
+
 
 🛠️ Tech Stack
-CategoryTechnologyVersionApplicationPython + Flask3.9ContainerizationDockerlatestCI/CDJenkinslatestCloudAWS EC2 (Ubuntu)22.04MonitoringPrometheuslatestDashboardGrafanalatestVersion ControlGit + GitHub—
+<img width="891" height="270" alt="image" src="https://github.com/user-attachments/assets/cd92e9c2-6f1e-4b55-8923-df511267466b" />
 
 📂 Project Structure
-DevOps_CI-CD_Pipeline_with_Monitoring_on_AWS/
-│
-├── app.py                      # Flask app + Prometheus metrics
-├── Dockerfile                  # Container build instructions
-├── requirements.txt            # flask, prometheus_client
-├── templates/
-│   └── index.html              # Task Manager UI
-├── project explaination.pdf    # Detailed project documentation
-└── README.md
+<img width="894" height="314" alt="image" src="https://github.com/user-attachments/assets/3f0c2a16-a41f-49a8-903e-88d1e1dfa8e7" />
+
 
 🐍 Application — Flask Task Manager
-The core app app.py is a Task Manager with 4 routes:
-RouteMethodWhat it does/GETShow all tasks/addPOSTAdd a task (saved as Pending + timestamp)/complete/<id>GETMark task as Completed/delete/<id>GETRemove task from list
-Prometheus Metrics — exposed at /metrics
-MetricTypeDescriptiontasks_created_totalCounterTotal tasks ever addedtasks_completed_totalCounterTotal tasks marked completedtasks_pending_totalGaugeLive count of pending tasks
+<img width="900" height="440" alt="image" src="https://github.com/user-attachments/assets/6ef3f579-8a79-4a79-9ac9-4a0cb2ac457b" />
 
 🐳 Dockerization
 dockerfileFROM python:3.9-slim
