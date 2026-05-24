@@ -34,7 +34,9 @@ Monitoring & Alerting → Prometheus + Grafana
 <img width="900" height="440" alt="image" src="https://github.com/user-attachments/assets/6ef3f579-8a79-4a79-9ac9-4a0cb2ac457b" />
 
 🐳 Dockerization
-dockerfileFROM python:3.9-slim
+
+dockerfile
+FROM python:3.9-slim
 WORKDIR /app
 COPY . .
 RUN pip install -r requirements.txt
