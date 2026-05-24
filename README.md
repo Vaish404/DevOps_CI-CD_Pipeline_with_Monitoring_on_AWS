@@ -35,16 +35,23 @@ Monitoring & Alerting → Prometheus + Grafana
 
 🐳 Dockerization
 
-dockerfile
+# Base image
 FROM python:3.9-slim
+
+# Set working directory inside container
 WORKDIR /app
+
+# Copy project files
 COPY . .
+
+# Install dependencies
 RUN pip install -r requirements.txt
+
+# Expose application port
 EXPOSE 5000
+
+# Run application
 CMD ["python", "app.py"]
-Build and run locally:
-bashdocker build -t devops-demo-app .
-docker run -p 5000:5000 devops-demo-app
 
 
 ⚙️ CI/CD Pipeline — Jenkins
